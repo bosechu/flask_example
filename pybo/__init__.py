@@ -4,7 +4,6 @@ from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import MetaData
 from flaskext.markdown import Markdown
 
-import config
 
 # setting custom names
 naming_convention = {
@@ -22,7 +21,7 @@ migrate = Migrate()
 def create_app(): # application factory, preliminarily defined function
 
     app = Flask(__name__) # making an app & run a module
-    app.config.from_object(config) # read contents from config.py
+    app.config.from_envvar('APP_CONFIG_FILE') # read contents from config directory
 
     # ORM: registering db, migrate objects
     db.init_app(app)
