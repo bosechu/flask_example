@@ -21,6 +21,7 @@ migrate = Migrate()
 def create_app(): # application factory, preliminarily defined function
 
     app = Flask(__name__) # making an app & run a module
+    # app.config.from_object(config)
     app.config.from_envvar('APP_CONFIG_FILE') # read contents from config directory
 
     # ORM: registering db, migrate objects
