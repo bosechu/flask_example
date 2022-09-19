@@ -1,5 +1,12 @@
 from config.default import *
 
-SQLALCHEMY_DATABASE_URI = 'sqlite:///{}'.format(os.path.join(BASE_DIR, 'pybo.db'))
-SQLALCHEMY_TRACK_MODIFICATIONS = False
-SECRET_KEY = b']H\xa6IM^\x01\xef1\x96\xf7Z\x8e\x92\x16}'
+from dotenv import load_dotenv
+
+load_dotenv(os.path.join(BASE_DIR, '.env'))
+
+SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://{user}:{pw}@{url}/{db}'.format(
+    user=os.getenv('DB_USER'),
+    pw=os.getenv('DB_PASSWORD'),
+    url=os.getenv('DB_HOST'),
+    db=os.getenv('DB_NAME')
+)
